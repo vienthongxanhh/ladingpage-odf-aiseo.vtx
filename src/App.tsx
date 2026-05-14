@@ -11,6 +11,7 @@ import { NetworkBackground } from './components/NetworkBackground';
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState('rack');
   const [activeSpecFilter, setActiveSpecFilter] = useState('rack');
@@ -917,7 +918,7 @@ export default function App() {
               },
             ].map((t, i) => (
               <div key={i} className="bg-[#0f172a] /10  p-8 rounded-3xl border border-white/20 flex flex-col">
-                <div className="flex text-accent-400 mb-6 gap-1">
+                <div className="flex text-yellow-400 mb-6 gap-1">
                   {[1,2,3,4,5].map(s => <Star key={s} className="w-5 h-5 fill-current" />)}
                 </div>
                 <p className="text-brand-50 text-base leading-relaxed mb-8 flex-1">"{t.text}"</p>
@@ -934,15 +935,19 @@ export default function App() {
           
           <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              "https://vienthongxanh.cdn.vccloud.vn/wp-content/uploads/2023/04/cung-cap-hop-phoi-quang-odf-chinh-hang-tai-vien-thong-xanh.jpg",
-              "https://vienthongxanh.cdn.vccloud.vn/wp-content/uploads/2021/11/tu-phoi-quang-odf-dung-luong-toi-da-192fo-5.jpg",
-              "https://vienthongxanh.cdn.vccloud.vn/wp-content/uploads/2020/04/hop-phoi-quang-odf-alantek-24-fo-1.jpg",
-              "https://vienthongxanh.cdn.vccloud.vn/wp-content/uploads/2023/04/hop-phoi-quang-odf-maxtel.jpg"
+              "https://maxtel.vn/wp-content/uploads/2026/05/thicong1.jpg",
+              "https://maxtel.vn/wp-content/uploads/2026/05/thicong2.jpg",
+              "https://maxtel.vn/wp-content/uploads/2026/05/thicong3.jpg",
+              "https://maxtel.vn/wp-content/uploads/2026/05/thicong4.jpg"
             ].map((img, i) => (
-               <div key={i} className="h-32 sm:h-48 rounded-xl overflow-hidden relative group">
+               <div 
+                 key={i} 
+                 className="h-32 sm:h-48 rounded-xl overflow-hidden relative group cursor-pointer"
+                 onClick={() => setSelectedImage(img)}
+               >
                  <img src={img} loading="lazy" decoding="async" alt="Maxtel in action" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                  <div className="absolute inset-0 bg-brand-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                   <span className="text-white font-medium text-sm border border-white/30 px-3 py-1 rounded-full bg-black/40-sm">Dự án thực tế</span>
+                   <span className="text-white font-medium text-sm border border-white/30 px-3 py-1 rounded-full bg-black/40">Phóng to</span>
                  </div>
                </div>
             ))}
@@ -1091,6 +1096,37 @@ export default function App() {
           Nhận Báo Giá Ngay <ArrowRight className="w-5 h-5" />
         </button>
       </div>
+
+      {/* Image Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 cursor-zoom-out"
+          >
+            <button 
+              className="absolute top-6 right-6 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 rounded-full p-2 transition-all transition-colors"
+              onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
+              aria-label="Đóng"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <motion.img 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              src={selectedImage} 
+              alt="Phóng to" 
+              className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" 
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
