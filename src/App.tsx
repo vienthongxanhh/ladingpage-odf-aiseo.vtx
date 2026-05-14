@@ -546,7 +546,7 @@ export default function App() {
       </section>
 
       {/* Brands / Social Proof */}
-      <section className="py-8 md:py-10 border-y border-brand-500/40 bg-[#0f172a] ">
+      <section className="py-8 md:py-10 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm font-semibold text-brand-50 uppercase tracking-wider mb-6 md:mb-8">Các đối tác tin cậy đã sử dụng Maxtel</p>
           <div className="flex flex-wrap justify-center gap-3 md:gap-6">
@@ -566,7 +566,7 @@ export default function App() {
       </section>
 
       {/* Features Outline */}
-      <section id="features" className="py-12 md:py-24 bg-[#020617]">
+      <section id="features" className="py-12 md:py-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 overflow-hidden">
             <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase">Chất Lượng Vượt Trội</h2>
@@ -666,7 +666,7 @@ export default function App() {
       </section>
 
       {/* Certifications & Awards Backdrop */}
-      <section id="certifications" className="py-12 md:py-24 border-b border-brand-500/30 bg-[#0f172a] relative overflow-hidden">
+      <section id="certifications" className="py-12 md:py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
             <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase">Uy tín & Chất lượng</h2>
@@ -690,7 +690,7 @@ export default function App() {
       </section>
 
       {/* Product Lines Section */}
-      <section id="products" className="py-12 md:py-24 relative tech-border">
+      <section id="products" className="py-12 md:py-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
             <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase"><span className="animate-pulse">Danh Mục Sản Phẩm</span></h2>
@@ -763,7 +763,7 @@ export default function App() {
       </section>
 
       {/* Specifications */}
-      <section id="specifications" className="py-12 md:py-24 bg-[#020617] border-b border-brand-500/30">
+      <section id="specifications" className="py-12 md:py-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
             <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase">Thông Số Kỹ Thuật</h2>
@@ -842,7 +842,7 @@ export default function App() {
       </section>
 
       {/* Highlight Details */}
-      <section id="highlights" className="py-12 md:py-24 bg-[#0f172a]  overflow-hidden">
+      <section id="highlights" className="py-12 md:py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
             <div>
@@ -887,9 +887,8 @@ export default function App() {
       </section>
 
       {/* Testimonials & Use Cases */}
-      <section className="py-12 md:py-24 bg-brand-900 text-white relative overflow-hidden">
+      <section className="py-12 md:py-24 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://vienthongxanh.cdn.vccloud.vn/wp-content/uploads/2023/04/cung-cap-hop-phoi-quang-odf-chinh-hang-tai-vien-thong-xanh.jpg')] opacity-10 bg-cover bg-center sm:mix-blend-overlay"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-900/90 via-brand-900 to-brand-950"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-10 md:mb-16 max-w-3xl mx-auto">
             <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-white">Sự Hài Lòng Từ Thực Tế Công Trường</h2>
@@ -956,7 +955,7 @@ export default function App() {
       </section>
 
       {/* CTA Section (Lead Generation Form) */}
-      <section id="contact-section" className="py-12 md:py-24 bg-[#020617] relative">
+      <section id="contact-section" className="py-12 md:py-24 relative">
         <div className="max-w-4xl mx-auto px-4">
           <div className="bg-[#0f172a]  rounded-3xl shadow-[0_0_20px_rgba(37,166,223,0.4)] overflow-hidden flex flex-col md:flex-row relative">
             <div className="md:w-5/12 bg-brand-600 p-8 sm:p-10 text-white flex flex-col justify-between">
@@ -1023,7 +1022,7 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="glass-panel-heavy text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] text-sm border-t border-brand-500/30 py-12 text-sm">
+      <footer className="text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] py-12 text-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <div className="flex items-center mb-6">
