@@ -857,6 +857,86 @@ export default function App() {
         </div>
       </section>
 
+      {/* Comparison Section */}
+      <section id="comparison" className="py-12 md:py-24 relative overflow-hidden bg-[#020617]">
+        <div className="absolute inset-0 bg-brand-900/10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-600/10 via-transparent to-transparent opacity-50"></div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+            <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase">So Sánh Chất Lượng</h2>
+            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+              Sự Khác Biệt Giữa Maxtel & Sản Phẩm Thông Thường
+            </p>
+          </div>
+
+          <div className="overflow-x-auto pb-4">
+            <div className="min-w-[800px] w-full rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(37,166,223,0.15)] border border-brand-500/20">
+              {/* Header */}
+              <div className="grid grid-cols-12 bg-[#0f172a] border-b border-brand-500/30">
+                <div className="col-span-4 p-5 sm:p-6 flex items-center">
+                  <span className="text-lg font-bold text-slate-300">Đặc Điểm</span>
+                </div>
+                <div className="col-span-4 p-5 sm:p-6 flex items-center justify-center border-l bg-slate-900 border-brand-500/10">
+                  <span className="text-lg font-medium text-slate-400">Sản Phẩm Thông Thường</span>
+                </div>
+                <div className="col-span-4 p-5 sm:p-6 flex items-center justify-center border-l border-brand-500/30 bg-brand-900/40 relative">
+                  <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-brand-500 to-accent-500 left-0"></div>
+                  <span className="text-xl font-black text-brand-400 flex items-center gap-2 text-center">
+                    <Award className="w-5 h-5 text-accent-500" /> ODF MAXTEL
+                  </span>
+                </div>
+              </div>
+
+              {/* Rows */}
+              {[
+                { 
+                  feature: "Độ dày thép vỏ", 
+                  normal: "0.8mm - 1.0mm, mềm, dễ móp méo khi vận chuyển.", 
+                  maxtel: "1.2mm - 1.5mm, cứng cáp, chịu lực va đập cực tốt." 
+                },
+                { 
+                  feature: "Lớp sơn bề mặt", 
+                  normal: "Sơn phun thông thường, dễ bong tróc, nhanh xuống cấp, gỉ sét.", 
+                  maxtel: "Sơn tĩnh điện cao cấp, siêu mịn, chống gỉ sét trên 10 năm." 
+                },
+                { 
+                  feature: "Khay hàn quang", 
+                  normal: "Nhựa tái chế giòn, dễ gãy khớp bản lề khi thao tác nhiều.", 
+                  maxtel: "Nhựa ABS/PC cao cấp, dẻo dai, chịu nhiệt, bản lề gập mở êm ái." 
+                },
+                { 
+                  feature: "Phụ kiện đi kèm", 
+                  normal: "Thường bị bớt hoặc sử dụng phụ kiện (dây, đầu nối) chất lượng kém.", 
+                  maxtel: "Full bộ chuẩn chất lượng: Adapter, Pigtail, Khay hàn, Ống co..." 
+                },
+                { 
+                  feature: "Suy hao (Insertion Loss)", 
+                  normal: "> 0.3dB, kết nối chập chờn, ảnh hưởng tốc độ mạng.", 
+                  maxtel: "Siêu thấp < 0.2dB, đảm bảo kết nối mạng quang tốc độ cao." 
+                }
+              ].map((row, index) => (
+                <div key={index} className={`grid grid-cols-12 border-b border-brand-500/10 last:border-b-0 hover:bg-slate-800/50 transition-colors ${index % 2 === 0 ? 'bg-[#020617]/50' : 'bg-[#0f172a]/50'}`}>
+                  <div className="col-span-4 p-5 flex items-center">
+                    <span className="text-base font-semibold text-white">{row.feature}</span>
+                  </div>
+                  <div className="col-span-4 p-5 flex items-center justify-center border-l bg-slate-900 border-brand-500/10">
+                    <p className="text-slate-400 text-sm text-center flex flex-col items-center gap-2">
+                       <X className="w-5 h-5 text-red-500 opacity-60" />
+                       {row.normal}
+                    </p>
+                  </div>
+                  <div className="col-span-4 p-5 flex items-center justify-center border-l border-brand-500/30 bg-brand-900/20">
+                     <p className="text-white text-sm text-center flex flex-col items-center gap-2 font-medium">
+                       <CheckCircle2 className="w-5 h-5 text-accent-500 drop-shadow-[0_0_5px_rgba(195,28,36,0.8)]" />
+                       {row.maxtel}
+                     </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Highlight Details */}
       <section id="highlights" className="py-12 md:py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -966,86 +1046,6 @@ export default function App() {
                  </div>
                </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Comparison Section */}
-      <section id="comparison" className="py-12 md:py-24 relative overflow-hidden bg-[#020617]">
-        <div className="absolute inset-0 bg-brand-900/10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-600/10 via-transparent to-transparent opacity-50"></div>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
-            <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase">So Sánh Chất Lượng</h2>
-            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
-              Sự Khác Biệt Giữa Maxtel & Sản Phẩm Thông Thường
-            </p>
-          </div>
-
-          <div className="overflow-x-auto pb-4">
-            <div className="min-w-[800px] w-full rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(37,166,223,0.15)] border border-brand-500/20">
-              {/* Header */}
-              <div className="grid grid-cols-12 bg-[#0f172a] border-b border-brand-500/30">
-                <div className="col-span-4 p-5 sm:p-6 flex items-center">
-                  <span className="text-lg font-bold text-slate-300">Đặc Điểm</span>
-                </div>
-                <div className="col-span-4 p-5 sm:p-6 flex items-center justify-center border-l bg-slate-900 border-brand-500/10">
-                  <span className="text-lg font-medium text-slate-400">Sản Phẩm Thông Thường</span>
-                </div>
-                <div className="col-span-4 p-5 sm:p-6 flex items-center justify-center border-l border-brand-500/30 bg-brand-900/40 relative">
-                  <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-brand-500 to-accent-500 left-0"></div>
-                  <span className="text-xl font-black text-brand-400 flex items-center gap-2 text-center">
-                    <Award className="w-5 h-5 text-accent-500" /> ODF MAXTEL
-                  </span>
-                </div>
-              </div>
-
-              {/* Rows */}
-              {[
-                { 
-                  feature: "Độ dày thép vỏ", 
-                  normal: "0.8mm - 1.0mm, mềm, dễ móp méo khi vận chuyển.", 
-                  maxtel: "1.2mm - 1.5mm, cứng cáp, chịu lực va đập cực tốt." 
-                },
-                { 
-                  feature: "Lớp sơn bề mặt", 
-                  normal: "Sơn phun thông thường, dễ bong tróc, nhanh xuống cấp, gỉ sét.", 
-                  maxtel: "Sơn tĩnh điện cao cấp, siêu mịn, chống gỉ sét trên 10 năm." 
-                },
-                { 
-                  feature: "Khay hàn quang", 
-                  normal: "Nhựa tái chế giòn, dễ gãy khớp bản lề khi thao tác nhiều.", 
-                  maxtel: "Nhựa ABS/PC cao cấp, dẻo dai, chịu nhiệt, bản lề gập mở êm ái." 
-                },
-                { 
-                  feature: "Phụ kiện đi kèm", 
-                  normal: "Thường bị bớt hoặc sử dụng phụ kiện (dây, đầu nối) chất lượng kém.", 
-                  maxtel: "Full bộ chuẩn chất lượng: Adapter, Pigtail, Khay hàn, Ống co..." 
-                },
-                { 
-                  feature: "Suy hao (Insertion Loss)", 
-                  normal: "> 0.3dB, kết nối chập chờn, ảnh hưởng tốc độ mạng.", 
-                  maxtel: "Siêu thấp < 0.2dB, đảm bảo kết nối mạng quang tốc độ cao." 
-                }
-              ].map((row, index) => (
-                <div key={index} className={`grid grid-cols-12 border-b border-brand-500/10 last:border-b-0 hover:bg-slate-800/50 transition-colors ${index % 2 === 0 ? 'bg-[#020617]/50' : 'bg-[#0f172a]/50'}`}>
-                  <div className="col-span-4 p-5 flex items-center">
-                    <span className="text-base font-semibold text-white">{row.feature}</span>
-                  </div>
-                  <div className="col-span-4 p-5 flex items-center justify-center border-l bg-slate-900 border-brand-500/10">
-                    <p className="text-slate-400 text-sm text-center flex flex-col items-center gap-2">
-                       <X className="w-5 h-5 text-red-500 opacity-60" />
-                       {row.normal}
-                    </p>
-                  </div>
-                  <div className="col-span-4 p-5 flex items-center justify-center border-l border-brand-500/30 bg-brand-900/20">
-                     <p className="text-white text-sm text-center flex flex-col items-center gap-2 font-medium">
-                       <CheckCircle2 className="w-5 h-5 text-accent-500 drop-shadow-[0_0_5px_rgba(195,28,36,0.8)]" />
-                       {row.maxtel}
-                     </p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
