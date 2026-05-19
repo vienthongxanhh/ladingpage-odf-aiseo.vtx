@@ -402,7 +402,6 @@ export default function App() {
           <div className="hidden md:flex flex-1 justify-center space-x-8">
             <a href="#features" className="text-sm font-medium text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:text-brand-500">Đặc tính</a>
             <a href="#products" className="text-sm font-medium text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:text-brand-500">Sản phẩm</a>
-            <a href="#highlights" className="text-sm font-medium text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:text-brand-500">Ưu điểm</a>
             <a href="#specifications" className="text-sm font-medium text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:text-brand-500">Thông số</a>
             <a href="#contact-section" className="text-sm font-medium text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:text-brand-500">Báo giá</a>
           </div>
@@ -438,7 +437,6 @@ export default function App() {
               <div className="px-4 py-4 flex flex-col space-y-2">
                 <a href="#features" onClick={() => setMobileMenuOpen(false)} className="px-3 py-3 text-base font-medium text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:bg-slate-800 rounded-lg transition-colors">Đặc tính</a>
                 <a href="#products" onClick={() => setMobileMenuOpen(false)} className="px-3 py-3 text-base font-medium text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:bg-slate-800 rounded-lg transition-colors">Sản phẩm</a>
-                <a href="#highlights" onClick={() => setMobileMenuOpen(false)} className="px-3 py-3 text-base font-medium text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:bg-slate-800 rounded-lg transition-colors">Ưu điểm</a>
                 <a href="#specifications" onClick={() => setMobileMenuOpen(false)} className="px-3 py-3 text-base font-medium text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:bg-slate-800 rounded-lg transition-colors">Thông số kỹ thuật</a>
                 <button 
                   onClick={() => { setMobileMenuOpen(false); scrollToContact(); }}
@@ -468,7 +466,7 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center lg:text-left"
+              className="text-center lg:text-left bg-[#020617]/60 backdrop-blur-md p-6 sm:p-8 lg:p-10 rounded-[2rem] border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.3)]"
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-900/40 border border-brand-100 text-brand-500 font-medium text-sm mb-6">
                 <span className="flex h-2 w-2 rounded-full bg-accent-500 animate-glow-red"></span>
@@ -484,13 +482,13 @@ export default function App() {
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 px-4 sm:px-0">
                 <button 
                   onClick={scrollToContact}
-                  className="w-full sm:w-auto bg-brand-600 hover:bg-red-600 text-white px-6 py-4 lg:px-8 lg:py-4 rounded-xl sm:rounded-full font-bold text-base sm:text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(37,166,223,0.4)] shadow-brand-500/20"
+                  className="w-full sm:w-auto bg-brand-600 hover:bg-blue-600 text-white px-6 py-4 lg:px-8 lg:py-4 rounded-xl sm:rounded-full font-bold text-base sm:text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(37,166,223,0.4)] shadow-brand-500/20"
                 >
                   Nhận Tư Vấn & Báo Giá <ArrowRight className="w-5 h-5" />
                 </button>
                 <a 
                   href="#products"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-4 lg:px-8 lg:py-4 rounded-xl sm:rounded-full font-bold text-base sm:text-lg transition-all bg-accent-600 hover:bg-accent-500 text-white border border-accent-400/50 shadow-[0_0_20px_rgba(195,28,36,0.6)]"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-4 lg:px-8 lg:py-4 rounded-xl sm:rounded-full font-bold text-base sm:text-lg transition-all bg-brand-600 hover:bg-blue-600 text-white border border-brand-500/50 shadow-[0_0_20px_rgba(37,166,223,0.4)] shadow-brand-500/20"
                 >
                   Xem Sản Phẩm
                 </a>
@@ -520,23 +518,18 @@ export default function App() {
                 </div>
                 {/* Product Image */}
                 <div className="bg-slate-100 rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-auto sm:h-[420px] relative flex md:flex-col items-center justify-center border border-brand-500/40">
-                  <img src="https://maxtel.vn/wp-content/uploads/2026/05/banner1.jpg" fetchPriority="high" loading="eager" alt="Banner ODF Maxtel" className="absolute inset-0 w-full h-full object-cover" />
+                  <img 
+                    src="https://maxtel.vn/wp-content/uploads/2026/05/banner1.jpg" 
+                    fetchPriority="high" 
+                    loading="eager" 
+                    alt="Banner ODF Maxtel" 
+                    className="absolute inset-0 w-full h-full object-cover cursor-pointer transition-transform duration-700 hover:scale-105" 
+                    onClick={() => setSelectedImage("https://maxtel.vn/wp-content/uploads/2026/05/banner1.jpg")}
+                  />
                   
-                  {/* Highlight elements */}
-                  <div className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 bg-black/60  rounded-xl p-2.5 sm:p-3 border border-white/10 flex items-center gap-2 sm:gap-3 shadow-[0_0_15px_rgba(37,166,223,0.3)]">
-                    <div className="bg-green-500/20 p-1.5 sm:p-2 rounded-lg"><Zap className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" /></div>
-                    <div className="text-left">
-                      <div className="text-white text-xs sm:text-sm font-bold">Suy hao siêu thấp</div>
-                      <div className="text-brand-50 text-sm">&lt; 0.2dB</div>
-                    </div>
-                  </div>
-                  
-                  <div className="hidden sm:flex absolute top-1/2 right-4 -translate-y-1/2 bg-black/60  rounded-xl p-3 border border-white/10 items-center gap-3 shadow-[0_0_15px_rgba(37,166,223,0.3)]">
-                    <div className="bg-brand-900/20 p-2 rounded-lg"><Wrench className="w-5 h-5 text-brand-400" /></div>
-                    <div className="text-left hidden md:block">
-                      <div className="text-white text-sm font-bold">Dễ thi công</div>
-                      <div className="text-brand-50 text-xs">Phụ kiện đầy đủ</div>
-                    </div>
+                  {/* Overlay for zoom hint */}
+                  <div className="absolute inset-0 bg-brand-900/40 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
+                    <span className="text-white font-medium text-sm border border-white/30 px-4 py-2 rounded-full bg-black/50 backdrop-blur-sm">Phóng to ảnh</span>
                   </div>
                 </div>
               </div>
@@ -598,7 +591,6 @@ export default function App() {
                   </div>
                   <div className="p-5 flex-1 flex flex-col border-t border-brand-500/10">
                     <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-brand-500 transition-colors">{prod.title}</h3>
-                    <p className="text-brand-50 text-sm leading-relaxed mb-4 flex-1 line-clamp-3">{prod.desc}</p>
                     <div className="flex items-center justify-center mt-auto pt-2 gap-2">
                       <button className="text-brand-400 bg-brand-900/40 border border-brand-500/30 group-hover:bg-brand-600 group-hover:text-white px-3 py-1.5 text-xs font-bold rounded-lg transition-colors shadow-sm whitespace-nowrap">
                         NHẬN BÁO GIÁ
@@ -710,7 +702,7 @@ export default function App() {
             <div className="md:flex-1 w-full relative">
                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[80%] max-h-[80%] bg-brand-600/10 blur-[40px] md:blur-[80px] pointer-events-none rounded-full"></div>
               
-               <div className="glass-panel relative rounded-2xl shadow-[0_0_30px_rgba(37,166,223,0.15)] overflow-hidden border border-brand-500/30 w-full z-10 bg-[#0f172a] sm:bg-[#0f172a]/80 sm:backdrop-blur-md aspect-video sm:aspect-auto sm:h-[400px] flex items-center justify-center p-0 sm:p-8 group">
+               <div className="glass-panel relative rounded-2xl shadow-[0_0_30px_rgba(37,166,223,0.15)] overflow-hidden border border-brand-500/30 w-full z-10 bg-[#0f172a] aspect-video sm:aspect-auto sm:h-[400px] group">
                  <AnimatePresence mode="wait">
                    {[
                      {
@@ -937,51 +929,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Highlight Details */}
-      <section id="highlights" className="py-12 md:py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
-            <div>
-              <h2 className="inline-block text-2xl sm:text-3xl font-extrabold text-accent-500 bg-[#0f172a]/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow-[0_0_20px_rgba(37,166,223,0.2)] border border-brand-500/30 mb-6">THIẾT KẾ THÔNG MINH, DỄ DÀNG VẬN HÀNH</h2>
-              <p className="text-lg text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] mb-8">
-                Hộp phối quang ODF Maxtel (12FO, 24FO, 48FO, 96FO) được thiết kế theo tiêu chuẩn công nghiệp 19 inch, cấu trúc gọn nhẹ nhưng cực kỳ vững chắc.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "Lỗ xỏ đai neo cáp với móc cố định bên trong.",
-                  "Khay hàn quang có thể tháo lắp và xoay linh hoạt.",
-                  "Các thanh Blank được đột lỗ chuẩn xác cho adapter.",
-                  "Bản lề chắc chắn, hỗ trợ khóa bảo vệ nếu cần."
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-white">
-                    <CheckCircle2 className="w-6 h-6 text-accent-500 [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] flex-shrink-0" />
-                    <span className="text-white">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-10">
-                <button onClick={scrollToContact} className="font-semibold text-brand-500 hover:text-brand-800 flex items-center gap-2 group">
-                  Xem bảng giá chi tiết <span className="transform group-hover:translate-x-1 transition-transform"><ChevronRight className="w-5 h-5"/></span>
-                </button>
-              </div>
-            </div>
-            
-            <div className="relative h-[300px] sm:h-[400px] lg:h-full min-h-[400px]">
-              <div className="absolute inset-0 bg-brand-800/40 rounded-3xl transform rotate-3 scale-105"></div>
-              <div className="bg-slate-800 rounded-3xl overflow-hidden relative shadow-2xl h-full w-full flex border border-slate-700 bg-[#0f172a] ">
-                 <img src="https://maxtel.vn/wp-content/uploads/2026/05/thiet-ke-thong-minh.jpg" loading="lazy" decoding="async" alt="Cable management detail" className="absolute inset-0 w-full h-full object-contain p-4 transition-all duration-700" />
-                 <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-10 p-4 sm:p-5 bg-brand-900/80  rounded-2xl border border-white/20 max-w-[200px] shadow-[0_0_20px_rgba(37,166,223,0.4)]">
-                   <div className="bg-[#0f172a] /20 border border-white/30 rounded-full w-10 h-10 flex items-center justify-center mb-3">
-                     <CheckCircle2 className="text-white w-5 h-5" />
-                   </div>
-                   <p className="text-white font-bold text-sm sm:text-base leading-tight">Quản Lý Dây Nhảy Gọn Gàng</p>
-                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials & Use Cases */}
       <section className="py-12 md:py-24 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://vienthongxanh.cdn.vccloud.vn/wp-content/uploads/2023/04/cung-cap-hop-phoi-quang-odf-chinh-hang-tai-vien-thong-xanh.jpg')] opacity-10 bg-cover bg-center sm:mix-blend-overlay"></div>
@@ -1054,24 +1001,24 @@ export default function App() {
       <section id="contact-section" className="py-12 md:py-24 relative">
         <div className="max-w-4xl mx-auto px-4">
           <div className="bg-[#0f172a]  rounded-3xl shadow-[0_0_20px_rgba(37,166,223,0.4)] overflow-hidden flex flex-col md:flex-row relative">
-            <div className="md:w-5/12 bg-brand-600 p-8 sm:p-10 text-white flex flex-col justify-between">
+            <div className="md:w-5/12 bg-slate-800/80 backdrop-blur-md p-8 sm:p-10 text-white flex flex-col justify-between border-r border-slate-700/50">
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold mb-2 text-white">ƯU ĐÃI THÁNG NÀY!</h3>
-                <p className="text-brand-50 text-xs sm:text-sm mb-6">Nhận bảng giá VIP dành riêng cho đại lý & nhà thầu dự án.</p>
-                <div className="flex items-center space-x-3 mb-4 text-xs sm:text-sm font-medium border-b border-brand-500 pb-3 sm:pb-4">
-                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent-500 [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] flex-shrink-0" /> <span>Chiết khấu cao nhất thị trường</span>
+                <p className="text-slate-300 text-xs sm:text-sm mb-6">Nhận bảng giá VIP dành riêng cho đại lý & nhà thầu dự án.</p>
+                <div className="flex items-center space-x-3 mb-4 text-xs sm:text-sm font-medium border-b border-slate-700/50 pb-3 sm:pb-4">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-brand-400 flex-shrink-0" /> <span>Chiết khấu cao nhất thị trường</span>
                 </div>
-                <div className="flex items-center space-x-3 mb-4 text-xs sm:text-sm font-medium border-b border-brand-500 pb-3 sm:pb-4">
-                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent-500 [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] flex-shrink-0" /> <span>Hàng sẵn số lượng lớn tại kho HN & HCM</span>
+                <div className="flex items-center space-x-3 mb-4 text-xs sm:text-sm font-medium border-b border-slate-700/50 pb-3 sm:pb-4">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-brand-400 flex-shrink-0" /> <span>Hàng sẵn số lượng lớn tại kho HN & HCM</span>
                 </div>
-                <div className="flex items-center space-x-3 text-xs sm:text-sm font-medium border-b border-brand-500 pb-3 sm:pb-4 min-h-[14px]">
-                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent-500 [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] flex-shrink-0" /> <span>Hỗ trợ kỹ thuật 24/7</span>
+                <div className="flex items-center space-x-3 text-xs sm:text-sm font-medium border-b border-slate-700/50 pb-3 sm:pb-4 min-h-[14px]">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-brand-400 flex-shrink-0" /> <span>Hỗ trợ kỹ thuật 24/7</span>
                 </div>
               </div>
               <div className="mt-8">
                 <div className="flex items-center gap-3">
-                  <div className="bg-[#0f172a] /20 p-2.5 sm:p-3 rounded-full">
-                    <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <div className="bg-slate-700/50 p-2.5 sm:p-3 rounded-full">
+                    <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-brand-400" />
                   </div>
                   <div>
                     <p className="text-sm text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] uppercase tracking-wider">Hotline 24/7</p>
