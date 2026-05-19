@@ -484,7 +484,7 @@ export default function App() {
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 px-4 sm:px-0">
                 <button 
                   onClick={scrollToContact}
-                  className="w-full sm:w-auto bg-brand-600 hover:bg-brand-900/400 text-white px-6 py-4 lg:px-8 lg:py-4 rounded-xl sm:rounded-full font-bold text-base sm:text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(37,166,223,0.4)] shadow-brand-500/20"
+                  className="w-full sm:w-auto bg-brand-600 hover:bg-red-600 text-white px-6 py-4 lg:px-8 lg:py-4 rounded-xl sm:rounded-full font-bold text-base sm:text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(37,166,223,0.4)] shadow-brand-500/20"
                 >
                   Nhận Tư Vấn & Báo Giá <ArrowRight className="w-5 h-5" />
                 </button>
@@ -545,22 +545,110 @@ export default function App() {
         </div>
       </section>
 
+      {/* Product Lines Section */}
+      <section id="products" className="py-12 md:py-24 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+            <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase"><span className="animate-pulse">Danh Mục Sản Phẩm</span></h2>
+            <p className="inline-block mt-2 text-3xl leading-8 font-extrabold tracking-tight text-accent-500 bg-[#0f172a]/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow-[0_0_20px_rgba(37,166,223,0.2)] border border-brand-500/30 sm:text-4xl">
+              Sản Phẩm ODF Chính Hãng
+            </p>
+            <p className="mt-4 text-lg text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)]">Đầy đủ các mẫu mã từ ODF trong nhà, ngoài trời đến tủ phối quang dung lượng cực lớn.</p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">
+            {[
+              { id: 'rack', name: 'Lắp Rack' },
+              { id: 'wall', name: 'Treo Tường' },
+              { id: 'outdoor', name: 'Ngoài Trời' },
+              { id: 'cabinet', name: 'Tủ Phối Quang' },
+            ].map(filter => (
+              <button
+                key={filter.id}
+                onClick={() => setActiveFilter(filter.id)}
+                className={`px-5 py-3 sm:py-2.5 rounded-full text-sm font-semibold transition-all min-h-[44px] ${
+                  activeFilter === filter.id 
+                    ? 'bg-brand-600 text-white shadow-[0_0_10px_rgba(37,166,223,0.2)] shadow-brand-500/20 scale-105' 
+                    : 'bg-[#0f172a] text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:bg-slate-800 border border-brand-500/30'
+                }`}
+              >
+                {filter.name}
+              </button>
+            ))}
+          </div>
+
+          <motion.div layout className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory gap-4 md:gap-6 px-4 md:px-0 pb-8 -mx-4 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <AnimatePresence>
+              {filteredProducts.map((prod) => (
+                <motion.div 
+                  key={prod.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  className="glass-panel rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(37,166,223,0.15)] border border-brand-500/30 flex flex-col group cursor-pointer flex-none w-[80vw] sm:w-[340px] md:w-auto md:flex-1 snap-center"
+                  onClick={scrollToContact}
+                >
+                  <div className="aspect-square relative overflow-hidden bg-white rounded-t-2xl p-4 flex items-center justify-center">
+                    <img src={prod.img} loading="lazy" decoding="async" alt={prod.title} className="w-full h-full p-2 object-contain group-hover:scale-110 transition-transform duration-700" />
+                    <div className="absolute bottom-3 right-3">
+                      <span className="bg-brand-600/90 text-white border border-brand-400/50 text-sm font-bold px-2.5 py-1 rounded shadow-sm">{prod.cap}</span>
+                    </div>
+                  </div>
+                  <div className="p-5 flex-1 flex flex-col border-t border-brand-500/10">
+                    <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-brand-500 transition-colors">{prod.title}</h3>
+                    <p className="text-brand-50 text-sm leading-relaxed mb-4 flex-1 line-clamp-3">{prod.desc}</p>
+                    <div className="flex items-center justify-center mt-auto pt-2 gap-2">
+                      <button className="text-brand-400 bg-brand-900/40 border border-brand-500/30 group-hover:bg-brand-600 group-hover:text-white px-3 py-1.5 text-xs font-bold rounded-lg transition-colors shadow-sm whitespace-nowrap">
+                        NHẬN BÁO GIÁ
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+          
+          <div className="text-center mt-12 sm:mt-16 pt-8 border-t border-brand-500/30">
+            <button onClick={scrollToContact} className="w-full sm:w-auto bg-accent-600 hover:bg-accent-500 text-white shadow-[0_0_20px_rgba(195,28,36,0.6)] border border-accent-400/50 font-bold px-8 py-3.5 rounded-xl sm:rounded-full inline-flex items-center justify-center gap-2 text-base transition-colors">
+              Xem toàn bộ Catalogue (PDF) <ChevronRight className="w-5 h-5"/>
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Brands / Social Proof */}
-      <section className="py-8 md:py-10 relative">
+      <section className="py-8 md:py-10 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm font-semibold text-brand-50 uppercase tracking-wider mb-6 md:mb-8">Các đối tác tin cậy đã sử dụng Maxtel</p>
-          <div className="flex flex-wrap justify-center gap-3 md:gap-6">
-            {[
-              { name: 'Viettel', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Viettel_logo_2021.svg', theme: 'border-red-500/30 hover:border-red-500 hover:shadow-[0_0_15px_rgba(239,68,68,0.4)]' },
-              { name: 'VNPT', logo: 'https://upload.wikimedia.org/wikipedia/vi/6/65/VNPT_Logo.svg', theme: 'border-blue-400/30 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.4)]' },
-              { name: 'FPT Telecom', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/11/FPT_logo_2010.svg', theme: 'border-orange-500/30 hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)]' },
-              { name: 'Mobifone', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/MobiFone_logo.svg', theme: 'border-cyan-400/30 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.4)]' },
-              { name: 'CMC Telecom', logo: 'https://cmctelecom.vn/wp-content/uploads/2019/04/Logo-CTEL-2-01.png', theme: 'border-indigo-400/30 hover:border-indigo-400 hover:shadow-[0_0_15px_rgba(129,140,248,0.4)]' }
-            ].map((partner, idx) => (
-              <div key={idx} className={`px-4 py-2 sm:px-6 sm:py-3 rounded-xl border transition-all duration-300 bg-white/95 hover:bg-white flex items-center justify-center min-w-[120px] sm:min-w-[180px] h-[60px] sm:h-[80px] cursor-default ${partner.theme}`}>
-                <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain transition-transform hover:scale-105 filter drop-shadow-sm p-1" />
-              </div>
-            ))}
+          
+          <div className="relative flex overflow-x-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+            <div className="flex animate-marquee whitespace-nowrap min-w-max">
+              {[
+                { name: 'Viettel', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Viettel_logo_2021.svg', theme: 'border-red-500/30 hover:border-red-500 hover:shadow-[0_0_15px_rgba(239,68,68,0.4)]' },
+                { name: 'VNPT', logo: 'https://upload.wikimedia.org/wikipedia/vi/6/65/VNPT_Logo.svg', theme: 'border-blue-400/30 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.4)]' },
+                { name: 'FPT Telecom', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/11/FPT_logo_2010.svg', theme: 'border-orange-500/30 hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)]' },
+                { name: 'Mobifone', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/MobiFone_logo.svg', theme: 'border-cyan-400/30 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.4)]' },
+                { name: 'CMC Telecom', logo: 'https://cmctelecom.vn/wp-content/uploads/2019/04/Logo-CTEL-2-01.png', theme: 'border-indigo-400/30 hover:border-indigo-400 hover:shadow-[0_0_15px_rgba(129,140,248,0.4)]' },
+                { name: 'VinaPhone', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/VinaPhone_logo.png', theme: 'border-blue-500/30 hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]' },
+                { name: 'Samsung', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg', theme: 'border-blue-600/30 hover:border-blue-600 hover:shadow-[0_0_15px_rgba(37,99,235,0.4)]' },
+                { name: 'VNG', logo: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/VNG_Corporation_logo.svg', theme: 'border-orange-600/30 hover:border-orange-600 hover:shadow-[0_0_15px_rgba(234,88,12,0.4)]' },
+                // Duplicate items for infinite scroll
+                { name: 'Viettel', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Viettel_logo_2021.svg', theme: 'border-red-500/30 hover:border-red-500 hover:shadow-[0_0_15px_rgba(239,68,68,0.4)]' },
+                { name: 'VNPT', logo: 'https://upload.wikimedia.org/wikipedia/vi/6/65/VNPT_Logo.svg', theme: 'border-blue-400/30 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.4)]' },
+                { name: 'FPT Telecom', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/11/FPT_logo_2010.svg', theme: 'border-orange-500/30 hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)]' },
+                { name: 'Mobifone', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/MobiFone_logo.svg', theme: 'border-cyan-400/30 hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.4)]' },
+                { name: 'CMC Telecom', logo: 'https://cmctelecom.vn/wp-content/uploads/2019/04/Logo-CTEL-2-01.png', theme: 'border-indigo-400/30 hover:border-indigo-400 hover:shadow-[0_0_15px_rgba(129,140,248,0.4)]' },
+                { name: 'VinaPhone', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/VinaPhone_logo.png', theme: 'border-blue-500/30 hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]' },
+                { name: 'Samsung', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg', theme: 'border-blue-600/30 hover:border-blue-600 hover:shadow-[0_0_15px_rgba(37,99,235,0.4)]' },
+                { name: 'VNG', logo: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/VNG_Corporation_logo.svg', theme: 'border-orange-600/30 hover:border-orange-600 hover:shadow-[0_0_15px_rgba(234,88,12,0.4)]' },
+              ].map((partner, idx) => (
+                <div key={idx} className={`mx-3 px-4 py-2 sm:px-6 sm:py-3 rounded-xl border transition-all duration-300 bg-white/95 hover:bg-white flex items-center justify-center w-[120px] sm:w-[180px] h-[60px] sm:h-[80px] cursor-default inline-flex ${partner.theme}`}>
+                  <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain transition-transform hover:scale-105 filter drop-shadow-sm p-1" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -685,79 +773,6 @@ export default function App() {
              <div className="w-full bg-[#020617] rounded-xl sm:rounded-2xl border border-brand-500/20 overflow-hidden relative group-hover:border-brand-500/40 transition-colors">
                <img src="https://maxtel.vn/wp-content/uploads/2026/05/giay-to111.jpg" loading="lazy" decoding="async" alt="ISO Certification and Awards" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
              </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Product Lines Section */}
-      <section id="products" className="py-12 md:py-24 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-            <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase"><span className="animate-pulse">Danh Mục Sản Phẩm</span></h2>
-            <p className="inline-block mt-2 text-3xl leading-8 font-extrabold tracking-tight text-accent-500 bg-[#0f172a]/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow-[0_0_20px_rgba(37,166,223,0.2)] border border-brand-500/30 sm:text-4xl">
-              Sản Phẩm ODF Chính Hãng
-            </p>
-            <p className="mt-4 text-lg text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)]">Đầy đủ các mẫu mã từ ODF trong nhà, ngoài trời đến tủ phối quang dung lượng cực lớn.</p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">
-            {[
-              { id: 'rack', name: 'Lắp Rack' },
-              { id: 'wall', name: 'Treo Tường' },
-              { id: 'outdoor', name: 'Ngoài Trời' },
-              { id: 'cabinet', name: 'Tủ Phối Quang' },
-            ].map(filter => (
-              <button
-                key={filter.id}
-                onClick={() => setActiveFilter(filter.id)}
-                className={`px-5 py-3 sm:py-2.5 rounded-full text-sm font-semibold transition-all min-h-[44px] ${
-                  activeFilter === filter.id 
-                    ? 'bg-brand-600 text-white shadow-[0_0_10px_rgba(37,166,223,0.2)] shadow-brand-500/20 scale-105' 
-                    : 'bg-[#0f172a] text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:bg-slate-800 border border-brand-500/30'
-                }`}
-              >
-                {filter.name}
-              </button>
-            ))}
-          </div>
-
-          <motion.div layout className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory gap-4 md:gap-6 px-4 md:px-0 pb-8 -mx-4 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-            <AnimatePresence>
-              {filteredProducts.map((prod) => (
-                <motion.div 
-                  key={prod.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                  className="glass-panel rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(37,166,223,0.15)] border border-brand-500/30 flex flex-col group cursor-pointer flex-none w-[80vw] sm:w-[340px] md:w-auto md:flex-1 snap-center"
-                  onClick={scrollToContact}
-                >
-                  <div className="aspect-square relative overflow-hidden bg-white rounded-t-2xl p-4 flex items-center justify-center">
-                    <img src={prod.img} loading="lazy" decoding="async" alt={prod.title} className="w-full h-full p-2 object-contain group-hover:scale-110 transition-transform duration-700" />
-                    <div className="absolute bottom-3 right-3">
-                      <span className="bg-brand-600/90 text-white border border-brand-400/50 text-sm font-bold px-2.5 py-1 rounded shadow-sm">{prod.cap}</span>
-                    </div>
-                  </div>
-                  <div className="p-5 flex-1 flex flex-col border-t border-brand-500/10">
-                    <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-brand-500 transition-colors">{prod.title}</h3>
-                    <p className="text-brand-50 text-sm leading-relaxed mb-4 flex-1 line-clamp-3">{prod.desc}</p>
-                    <div className="flex items-center justify-center mt-auto pt-2 gap-2">
-                      <button className="text-brand-400 bg-brand-900/40 border border-brand-500/30 group-hover:bg-brand-600 group-hover:text-white px-3 py-1.5 text-xs font-bold rounded-lg transition-colors shadow-sm whitespace-nowrap">
-                        NHẬN BÁO GIÁ
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-          
-          <div className="text-center mt-12 sm:mt-16 pt-8 border-t border-brand-500/30">
-            <button onClick={scrollToContact} className="w-full sm:w-auto bg-accent-600 hover:bg-accent-500 text-white shadow-[0_0_20px_rgba(195,28,36,0.6)] border border-accent-400/50 font-bold px-8 py-3.5 rounded-xl sm:rounded-full inline-flex items-center justify-center gap-2 text-base transition-colors">
-              Xem toàn bộ Catalogue (PDF) <ChevronRight className="w-5 h-5"/>
-            </button>
           </div>
         </div>
       </section>
