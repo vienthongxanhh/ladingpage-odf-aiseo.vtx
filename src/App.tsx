@@ -860,7 +860,58 @@ export default function App() {
             </p>
           </div>
 
-          <div className="overflow-x-auto pb-4">
+          {/* Mobile Layout */}
+          <div className="md:hidden space-y-4 pb-4">
+            {[
+              { 
+                feature: "Độ dày thép vỏ", 
+                normal: "0.8mm - 1.0mm, mềm, dễ móp méo khi vận chuyển.", 
+                maxtel: "1.2mm - 1.5mm, cứng cáp, chịu lực va đập cực tốt." 
+              },
+              { 
+                feature: "Lớp sơn bề mặt", 
+                normal: "Sơn phun thông thường, dễ bong tróc, nhanh xuống cấp, gỉ sét.", 
+                maxtel: "Sơn tĩnh điện cao cấp, siêu mịn, chống gỉ sét trên 10 năm." 
+              },
+              { 
+                feature: "Khay hàn quang", 
+                normal: "Nhựa tái chế giòn, dễ gãy khớp bản lề khi thao tác nhiều.", 
+                maxtel: "Nhựa ABS/PC cao cấp, dẻo dai, chịu nhiệt, bản lề gập mở êm ái." 
+              },
+              { 
+                feature: "Phụ kiện đi kèm", 
+                normal: "Thường bị bớt hoặc sử dụng phụ kiện (dây, đầu nối) chất lượng kém.", 
+                maxtel: "Full bộ chuẩn chất lượng: Adapter, Pigtail, Khay hàn, Ống co..." 
+              },
+              { 
+                feature: "Suy hao (Insertion Loss)", 
+                normal: "> 0.3dB, kết nối chập chờn, ảnh hưởng tốc độ mạng.", 
+                maxtel: "Siêu thấp < 0.2dB, đảm bảo kết nối mạng quang tốc độ cao." 
+              }
+            ].map((row, index) => (
+              <div key={index} className="bg-[#0f172a] rounded-2xl border border-brand-500/20 overflow-hidden shadow-lg relative pb-1">
+                <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-brand-500/50 to-accent-500/50 left-0"></div>
+                <div className="bg-slate-800/80 p-3 border-b border-brand-500/30 text-center">
+                  <h3 className="text-base font-bold text-white">{row.feature}</h3>
+                </div>
+                <div className="grid grid-cols-2 divide-x divide-brand-500/10">
+                   <div className="p-4 flex flex-col items-center text-center gap-2 bg-slate-900/50">
+                     <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">Thông Thường</span>
+                     <X className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 opacity-60" />
+                     <p className="text-slate-400 text-xs sm:text-sm">{row.normal}</p>
+                   </div>
+                   <div className="p-4 flex flex-col items-center text-center gap-2 bg-brand-900/20 relative">
+                     <span className="text-[10px] sm:text-xs font-bold text-brand-400 uppercase tracking-wider">ODF MAXTEL</span>
+                     <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-accent-500 drop-shadow-[0_0_5px_rgba(195,28,36,0.8)]" />
+                     <p className="text-white text-xs sm:text-sm font-medium">{row.maxtel}</p>
+                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden md:block overflow-x-auto pb-4">
             <div className="min-w-[800px] w-full rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(37,166,223,0.15)] border border-brand-500/20">
               {/* Header */}
               <div className="grid grid-cols-12 bg-[#0f172a] border-b border-brand-500/30">
