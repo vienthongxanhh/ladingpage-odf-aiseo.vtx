@@ -493,8 +493,30 @@ export default function App() {
                   Xem Sản Phẩm
                 </a>
               </div>
+
+              {/* Mobile Image (Hidden on Desktop) */}
+              <div className="lg:hidden mt-8 relative">
+                <div className="rounded-3xl p-1.5 sm:p-2 bg-gradient-to-tr from-brand-100 to-white shadow-2xl relative">
+                  <div className="absolute top-4 right-4 bg-[#0f172a] px-3 py-1.5 rounded-full font-bold text-accent-600 text-xs shadow-sm z-20 flex items-center gap-1">
+                    <Star className="w-3 h-3 fill-current pt-0.5" /> 4.9/5 Excellent
+                  </div>
+                  <div className="bg-slate-100 rounded-2xl overflow-hidden aspect-[4/3] relative flex items-center justify-center border border-brand-500/40">
+                    <img 
+                      src="https://maxtel.vn/wp-content/uploads/2026/05/banner1.jpg" 
+                      fetchPriority="high" 
+                      loading="eager" 
+                      alt="Banner ODF Maxtel" 
+                      className="absolute inset-0 w-full h-full object-cover cursor-pointer transition-transform duration-700 hover:scale-105" 
+                      onClick={() => setSelectedImage("https://maxtel.vn/wp-content/uploads/2026/05/banner1.jpg")}
+                    />
+                    <div className="absolute inset-0 bg-brand-900/40 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
+                      <span className="text-white font-medium text-sm border border-white/30 px-4 py-2 rounded-full bg-black/50 backdrop-blur-sm">Phóng to ảnh</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
               
-              <div className="mt-8 lg:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 text-sm text-brand-50">
+              <div className="mt-6 lg:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 text-sm text-brand-50">
                 <div className="flex -space-x-2">
                   {[1,2,3,4].map(i => (
                     <div key={i} className="w-8 h-8 rounded-full bg-brand-800/40 border-2 border-white flex items-center justify-center shadow-sm">
@@ -506,11 +528,12 @@ export default function App() {
               </div>
             </motion.div>
 
+            {/* Desktop Image (Hidden on Mobile) */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative lg:ml-10"
+              className="hidden lg:block relative lg:ml-10"
             >
               <div className="rounded-3xl p-1.5 sm:p-2 bg-gradient-to-tr from-brand-100 to-white shadow-2xl relative">
                 <div className="absolute top-4 right-4 bg-[#0f172a]  px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold text-accent-600 text-xs sm:text-sm shadow-sm z-20 flex items-center gap-1">
@@ -570,7 +593,7 @@ export default function App() {
             ))}
           </div>
 
-          <motion.div layout className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 snap-x snap-mandatory gap-4 md:gap-6 px-4 md:px-0 pb-8 -mx-4 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <motion.div layout className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 pb-8">
             <AnimatePresence>
               {filteredProducts.map((prod) => (
                 <motion.div 
@@ -580,7 +603,7 @@ export default function App() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
-                  className="glass-panel rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(37,166,223,0.15)] border border-brand-500/30 flex flex-col group cursor-pointer flex-none w-[80vw] sm:w-[340px] md:w-auto md:flex-1 snap-center"
+                  className="glass-panel rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(37,166,223,0.15)] border border-brand-500/30 flex flex-col group cursor-pointer w-full"
                   onClick={scrollToContact}
                 >
                   <div className="aspect-square relative overflow-hidden bg-white rounded-t-2xl p-4 flex items-center justify-center">
@@ -589,10 +612,10 @@ export default function App() {
                       <span className="bg-brand-600/90 text-white border border-brand-400/50 text-sm font-bold px-2.5 py-1 rounded shadow-sm">{prod.cap}</span>
                     </div>
                   </div>
-                  <div className="p-5 flex-1 flex flex-col border-t border-brand-500/10">
-                    <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-brand-500 transition-colors">{prod.title}</h3>
+                  <div className="p-3 sm:p-5 flex-1 flex flex-col border-t border-brand-500/10">
+                    <h3 className="text-sm sm:text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-brand-500 transition-colors">{prod.title}</h3>
                     <div className="flex items-center justify-center mt-auto pt-2 gap-2">
-                      <button className="text-brand-400 bg-brand-900/40 border border-brand-500/30 group-hover:bg-brand-600 group-hover:text-white px-3 py-1.5 text-xs font-bold rounded-lg transition-colors shadow-sm whitespace-nowrap">
+                      <button className="text-brand-400 bg-brand-900/40 border border-brand-500/30 group-hover:bg-brand-600 group-hover:text-white px-2 py-1.5 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-bold rounded-lg transition-colors shadow-sm whitespace-nowrap w-full">
                         NHẬN BÁO GIÁ
                       </button>
                     </div>
