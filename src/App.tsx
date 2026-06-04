@@ -69,6 +69,13 @@ export default function App() {
   };
 
   useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveFeature((prev) => (prev + 1) % 3);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -478,24 +485,9 @@ export default function App() {
               <p className="text-base sm:text-lg text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] mb-6 lg:mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-2 lg:px-0">
                 Giải pháp bảo vệ điểm đấu nối quang hoàn hảo. Vỏ thép sơn tĩnh điện chống gỉ sét, thiết kế thông minh, tối ưu cho hạ tầng viễn thông chuyên nghiệp.
               </p>
-              
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 px-4 sm:px-0">
-                <button 
-                  onClick={scrollToContact}
-                  className="w-full sm:w-auto bg-brand-600 hover:bg-blue-600 text-white px-6 py-4 lg:px-8 lg:py-4 rounded-xl sm:rounded-full font-bold text-base sm:text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(37,166,223,0.4)] shadow-brand-500/20"
-                >
-                  Nhận Tư Vấn & Báo Giá <ArrowRight className="w-5 h-5" />
-                </button>
-                <a 
-                  href="#products"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-4 lg:px-8 lg:py-4 rounded-xl sm:rounded-full font-bold text-base sm:text-lg transition-all bg-brand-600 hover:bg-blue-600 text-white border border-brand-500/50 shadow-[0_0_20px_rgba(37,166,223,0.4)] shadow-brand-500/20"
-                >
-                  Xem Sản Phẩm
-                </a>
-              </div>
 
               {/* Mobile Image (Hidden on Desktop) */}
-              <div className="lg:hidden mt-8 relative">
+              <div className="lg:hidden mb-8 relative">
                 <div className="rounded-3xl p-1.5 sm:p-2 bg-gradient-to-tr from-brand-100 to-white shadow-2xl relative">
                   <div className="absolute top-4 right-4 bg-[#0f172a] px-3 py-1.5 rounded-full font-bold text-accent-600 text-xs shadow-sm z-20 flex items-center gap-1">
                     <Star className="w-3 h-3 fill-current pt-0.5" /> 4.9/5 Excellent
@@ -514,6 +506,21 @@ export default function App() {
                     </div>
                   </div>
                 </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 px-4 sm:px-0">
+                <button 
+                  onClick={scrollToContact}
+                  className="w-full sm:w-auto bg-brand-600 hover:bg-blue-600 text-white px-6 py-4 lg:px-8 lg:py-4 rounded-xl sm:rounded-full font-bold text-base sm:text-lg transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(37,166,223,0.4)] shadow-brand-500/20"
+                >
+                  Nhận Tư Vấn & Báo Giá <ArrowRight className="w-5 h-5" />
+                </button>
+                <a 
+                  href="#products"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-4 lg:px-8 lg:py-4 rounded-xl sm:rounded-full font-bold text-base sm:text-lg transition-all bg-brand-600 hover:bg-blue-600 text-white border border-brand-500/50 shadow-[0_0_20px_rgba(37,166,223,0.4)] shadow-brand-500/20"
+                >
+                  Xem Sản Phẩm
+                </a>
               </div>
               
               <div className="mt-6 lg:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 text-sm text-brand-50">
@@ -572,7 +579,7 @@ export default function App() {
             <p className="mt-4 text-lg text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)]">Đầy đủ các mẫu mã từ ODF trong nhà, ngoài trời đến tủ phối quang dung lượng cực lớn.</p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">
+          <div className="flex overflow-x-auto md:flex-wrap md:justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 hide-scrollbar snap-x snap-mandatory px-4 -mx-4 md:px-0 md:mx-0">
             {[
               { id: 'rack', name: 'Lắp Rack' },
               { id: 'wall', name: 'Treo Tường' },
@@ -582,9 +589,9 @@ export default function App() {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`px-5 py-3 sm:py-2.5 rounded-full text-sm font-semibold transition-all min-h-[44px] ${
+                className={`flex-shrink-0 snap-center px-5 py-3 sm:py-2.5 rounded-full text-sm font-semibold transition-all min-h-[44px] ${
                   activeFilter === filter.id 
-                    ? 'bg-brand-600 text-white shadow-[0_0_10px_rgba(37,166,223,0.2)] shadow-brand-500/20 scale-105' 
+                    ? 'bg-brand-600 text-white shadow-[0_0_10px_rgba(37,166,223,0.2)] shadow-brand-500/20 md:scale-105' 
                     : 'bg-[#0f172a] text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] hover:bg-slate-800 border border-brand-500/30'
                 }`}
               >
@@ -613,7 +620,7 @@ export default function App() {
                     </div>
                   </div>
                   <div className="p-3 sm:p-5 flex-1 flex flex-col border-t border-brand-500/10">
-                    <h3 className="text-sm sm:text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-brand-500 transition-colors">{prod.title}</h3>
+                    <h3 className="text-[11px] leading-tight sm:text-lg sm:leading-normal font-bold text-white mb-2 line-clamp-3 sm:line-clamp-2 group-hover:text-brand-500 transition-colors">{prod.title}</h3>
                     <div className="flex items-center justify-center mt-auto pt-2 gap-2">
                       <button className="text-brand-400 bg-brand-900/40 border border-brand-500/30 group-hover:bg-brand-600 group-hover:text-white px-2 py-1.5 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-bold rounded-lg transition-colors shadow-sm whitespace-nowrap w-full">
                         NHẬN BÁO GIÁ
@@ -681,8 +688,7 @@ export default function App() {
           <div className="flex flex-col md:flex-row gap-8 lg:gap-12 max-w-6xl mx-auto">
             {/* Sidebar / Tabs */}
             <div 
-              className="flex flex-row overflow-x-auto md:flex-col gap-2 sm:gap-3 md:w-64 lg:w-80 pb-4 md:pb-0 flex-shrink-0"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              className="hidden md:flex flex-col gap-3 w-64 lg:w-80 flex-shrink-0"
             >
               {[
                 { 
@@ -750,10 +756,10 @@ export default function App() {
                      activeFeature === idx && (
                        <motion.div
                          key={idx}
-                         initial={{ opacity: 0, scale: 0.95 }}
-                         animate={{ opacity: 1, scale: 1 }}
-                         exit={{ opacity: 0, scale: 0.95 }}
-                         transition={{ duration: 0.3 }}
+                         initial={{ opacity: 0, x: 20 }}
+                         animate={{ opacity: 1, x: 0 }}
+                         exit={{ opacity: 0, x: -20 }}
+                         transition={{ duration: 0.5, ease: "easeInOut" }}
                          className="flex flex-col items-center text-center w-full h-full justify-center absolute inset-0 cursor-pointer"
                          onClick={() => setSelectedImage(content.image)}
                        >
@@ -884,7 +890,7 @@ export default function App() {
           </div>
 
           {/* Mobile Layout */}
-          <div className="md:hidden space-y-4 pb-4">
+          <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 px-4 -mx-4 hide-scrollbar">
             {[
               { 
                 feature: "Độ dày thép vỏ", 
@@ -912,21 +918,21 @@ export default function App() {
                 maxtel: "Siêu thấp < 0.2dB, đảm bảo kết nối mạng quang tốc độ cao." 
               }
             ].map((row, index) => (
-              <div key={index} className="bg-[#0f172a] rounded-2xl border border-brand-500/20 overflow-hidden shadow-lg relative pb-1">
+              <div key={index} className="bg-[#0f172a] rounded-2xl border border-brand-500/20 overflow-hidden shadow-lg relative pb-1 shrink-0 w-[85vw] snap-center">
                 <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-brand-500/50 to-accent-500/50 left-0"></div>
                 <div className="bg-slate-800/80 p-3 border-b border-brand-500/30 text-center">
                   <h3 className="text-base font-bold text-white">{row.feature}</h3>
                 </div>
-                <div className="grid grid-cols-2 divide-x divide-brand-500/10">
-                   <div className="p-4 flex flex-col items-center text-center gap-2 bg-slate-900/50">
-                     <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">Thông Thường</span>
-                     <X className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 opacity-60" />
-                     <p className="text-slate-400 text-xs sm:text-sm">{row.normal}</p>
+                <div className="grid grid-cols-2 divide-x divide-brand-500/10 h-full">
+                   <div className="p-4 flex flex-col items-center text-center gap-2 bg-slate-900/50 pb-12">
+                     <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Thông Thường</span>
+                     <X className="w-5 h-5 text-red-500 opacity-60 shrink-0" />
+                     <p className="text-slate-400 text-xs">{row.normal}</p>
                    </div>
-                   <div className="p-4 flex flex-col items-center text-center gap-2 bg-brand-900/20 relative">
-                     <span className="text-[10px] sm:text-xs font-bold text-brand-400 uppercase tracking-wider">ODF MAXTEL</span>
-                     <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-accent-500 drop-shadow-[0_0_5px_rgba(195,28,36,0.8)]" />
-                     <p className="text-white text-xs sm:text-sm font-medium">{row.maxtel}</p>
+                   <div className="p-4 flex flex-col items-center text-center gap-2 bg-brand-900/20 relative pb-12">
+                     <span className="text-[10px] font-bold text-brand-400 uppercase tracking-wider">ODF MAXTEL</span>
+                     <CheckCircle2 className="w-5 h-5 text-accent-500 drop-shadow-[0_0_5px_rgba(195,28,36,0.8)] shrink-0" />
+                     <p className="text-white text-xs font-medium">{row.maxtel}</p>
                    </div>
                 </div>
               </div>
@@ -1012,61 +1018,68 @@ export default function App() {
             <p className="text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] text-lg">Maxtel tự hào đồng hành cùng các đơn vị thi công trên toàn quốc.</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { 
-                name: "Anh Hoàng Quang", 
-                role: "Chỉ Huy Trưởng - VietCom", 
-                img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&q=80",
-                text: "Trước xài ODF giá rẻ toàn bị móp méo lúc vận chuyển, khay hàn thì lỏng lẻo. Từ lúc chuyển qua Maxtel anh em kỹ thuật nhàn hẳn, thi công nhanh, nhìn tủ rack cực kỳ thẩm mỹ và chuyên nghiệp." 
-              },
-              { 
-                name: "Anh Tuấn Bình", 
-                role: "Kỹ Thuật Viên VNPT", 
-                img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
-                text: "Là dân kỹ thuật, tôi đánh giá cao độ chính xác của thanh blank và chuẩn adapter đi kèm. Suy hao test qua máy đo luôn đạt chuẩn siêu thấp. Vỏ thép cầm rất đầm tay và cứng cáp." 
-              },
-              { 
-                name: "Chị Thu Hoa", 
-                role: "Đại Lý Vật Tư Mạng D2", 
-                img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80",
-                text: "Bán hàng Maxtel rất thích vì chưa thấy khách nào phàn nàn phải bảo hành. Vỏ hộp bọc carton dày dặn, bên trong lót xốp, tem mác và phiếu QC rõ ràng. Khách dự án mua đi mua lại liên tục." 
-              },
-            ].map((t, i) => (
-              <div key={i} className="bg-[#0f172a] /10  p-8 rounded-3xl border border-white/20 flex flex-col">
-                <div className="flex text-yellow-400 mb-6 gap-1">
-                  {[1,2,3,4,5].map(s => <Star key={s} className="w-5 h-5 fill-current" />)}
-                </div>
-                <p className="text-brand-50 text-base leading-relaxed mb-8 flex-1">"{t.text}"</p>
-                <div className="flex items-center gap-4 mt-auto">
-                  <img src={t.img} loading="lazy" decoding="async" alt={t.name} className="w-12 h-12 rounded-full border-2 border-brand-500 object-cover" />
-                  <div>
-                    <div className="font-bold text-lg text-white">{t.name}</div>
-                    <div className="text-sm text-brand-50">{t.role}</div>
+          <div className="relative flex overflow-x-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)] pb-4 pt-2 -mx-4 sm:mx-0">
+            <div className="flex animate-marquee hover:[animation-play-state:paused] whitespace-normal min-w-max">
+              {Array.from({ length: 4 }).flatMap(() => [
+                { 
+                  name: "Anh Hoàng Quang", 
+                  role: "Chỉ Huy Trưởng - VietCom", 
+                  img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&q=80",
+                  text: "Trước xài ODF giá rẻ toàn bị móp méo lúc vận chuyển, khay hàn thì lỏng lẻo. Từ lúc chuyển qua Maxtel anh em kỹ thuật nhàn hẳn, thi công nhanh, nhìn tủ rack cực kỳ thẩm mỹ và chuyên nghiệp." 
+                },
+                { 
+                  name: "Anh Tuấn Bình", 
+                  role: "Kỹ Thuật Viên VNPT", 
+                  img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
+                  text: "Là dân kỹ thuật, tôi đánh giá cao độ chính xác của thanh blank và chuẩn adapter đi kèm. Suy hao test qua máy đo luôn đạt chuẩn siêu thấp. Vỏ thép cầm rất đầm tay và cứng cáp." 
+                },
+                { 
+                  name: "Chị Thu Hoa", 
+                  role: "Đại Lý Vật Tư Mạng D2", 
+                  img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80",
+                  text: "Bán hàng Maxtel rất thích vì chưa thấy khách nào phàn nàn phải bảo hành. Vỏ hộp bọc carton dày dặn, bên trong lót xốp, tem mác và phiếu QC rõ ràng. Khách dự án mua đi mua lại liên tục." 
+                },
+              ]).map((t, i) => (
+                <div key={i} className="mx-4 w-[320px] md:w-[400px] bg-[#0f172a]/60 p-8 rounded-3xl border border-white/20 flex flex-col shrink-0 group hover:border-brand-500/80 hover:bg-[#0f172a] hover:shadow-[0_0_20px_rgba(37,166,223,0.2)] transition-all cursor-pointer">
+                  <div className="flex text-yellow-400 mb-6 gap-1 group-hover:scale-105 origin-left transition-transform">
+                    {[1,2,3,4,5].map(s => <Star key={`star-${s}`} className="w-5 h-5 fill-current" />)}
+                  </div>
+                  <p className="text-brand-50 text-base leading-relaxed mb-8 flex-1">"{t.text}"</p>
+                  <div className="flex items-center gap-4 mt-auto">
+                    <img src={t.img} loading="lazy" decoding="async" alt={t.name} className="w-12 h-12 rounded-full border-2 border-brand-500 object-cover" />
+                    <div>
+                      <div className="font-bold text-lg text-white group-hover:text-brand-400 transition-colors">{t.name}</div>
+                      <div className="text-sm text-brand-50/80">{t.role}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
           
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              "https://maxtel.vn/wp-content/uploads/2026/05/thicong1.jpg",
-              "https://maxtel.vn/wp-content/uploads/2026/05/thicong2.jpg",
-              "https://maxtel.vn/wp-content/uploads/2026/05/thicong3.jpg",
-              "https://maxtel.vn/wp-content/uploads/2026/05/thicong4.jpg"
-            ].map((img, i) => (
-               <div 
-                 key={i} 
-                 className="h-32 sm:h-48 rounded-xl overflow-hidden relative group cursor-pointer"
-                 onClick={() => setSelectedImage(img)}
-               >
-                 <img src={img} loading="lazy" decoding="async" alt="Maxtel in action" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                 <div className="absolute inset-0 bg-brand-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                   <span className="text-white font-medium text-sm border border-white/30 px-3 py-1 rounded-full bg-black/40">Phóng to</span>
+          <div className="mt-20 relative flex overflow-x-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)] pb-4 pt-2 -mx-4 sm:mx-0">
+            <div 
+              className="flex animate-marquee hover:[animation-play-state:paused] whitespace-normal min-w-max gap-4 px-4 sm:px-0"
+              style={{ animationDuration: '40s' }}
+            >
+              {Array.from({ length: 4 }).flatMap(() => [
+                "https://maxtel.vn/wp-content/uploads/2026/05/thicong1.jpg",
+                "https://maxtel.vn/wp-content/uploads/2026/05/thicong2.jpg",
+                "https://maxtel.vn/wp-content/uploads/2026/05/thicong3.jpg",
+                "https://maxtel.vn/wp-content/uploads/2026/05/thicong4.jpg"
+              ]).map((img, i) => (
+                 <div 
+                   key={i} 
+                   className="w-[280px] sm:w-[360px] h-40 sm:h-56 rounded-xl overflow-hidden relative group cursor-pointer shrink-0"
+                   onClick={() => setSelectedImage(img)}
+                 >
+                   <img src={img} loading="lazy" decoding="async" alt="Maxtel in action" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                   <div className="absolute inset-0 bg-brand-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                     <span className="text-white font-medium text-sm border border-white/30 px-3 py-1 rounded-full bg-black/40">Phóng to</span>
+                   </div>
                  </div>
-               </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -1075,7 +1088,7 @@ export default function App() {
       <section id="contact-section" className="py-12 md:py-24 relative">
         <div className="max-w-4xl mx-auto px-4">
           <div className="bg-[#0f172a]  rounded-3xl shadow-[0_0_20px_rgba(37,166,223,0.4)] overflow-hidden flex flex-col md:flex-row relative">
-            <div className="md:w-5/12 bg-slate-800/80 backdrop-blur-md p-8 sm:p-10 text-white flex flex-col justify-between border-r border-slate-700/50">
+            <div className="hidden md:flex md:w-5/12 bg-slate-800/80 backdrop-blur-md p-8 sm:p-10 text-white flex-col justify-between border-r border-slate-700/50">
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold mb-2 text-white">ƯU ĐÃI THÁNG NÀY!</h3>
                 <p className="text-slate-300 text-xs sm:text-sm mb-6">Nhận bảng giá VIP dành riêng cho đại lý & nhà thầu dự án.</p>
