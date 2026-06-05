@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShieldCheck, Zap, Server, Wrench, CheckCircle2, Phone, Mail, ChevronRight, Star, Clock, ArrowRight, Menu, X, Check, Box, CloudLightning, Layers, Award } from 'lucide-react';
+import { ShieldCheck, Zap, Server, Wrench, CheckCircle2, Phone, Mail, ChevronRight, Star, Clock, ArrowRight, Menu, X, Check, Box, CloudLightning, Layers, Award, HeadphonesIcon, MessageCircle } from 'lucide-react';
 import { NetworkBackground } from './components/NetworkBackground';
 
 export default function App() {
@@ -16,6 +16,7 @@ export default function App() {
   const [activeFilter, setActiveFilter] = useState('rack');
   const [activeSpecFilter, setActiveSpecFilter] = useState('rack');
   const [activeFeature, setActiveFeature] = useState(0);
+  const [showZaloOptions, setShowZaloOptions] = useState(false);
 
   const specificationsData: Record<string, { param: string, value: string }[]> = {
     rack: [
@@ -810,11 +811,10 @@ export default function App() {
             <p className="mt-4 text-lg text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)]">Bảng thông số kỹ thuật chuẩn giúp quý khách dễ dàng lựa chọn sản phẩm phù hợp với dự án.</p>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-8 lg:gap-12 max-w-5xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-12 max-w-5xl mx-auto">
             {/* Sidebar / Tabs */}
             <div 
-              className="flex flex-row overflow-x-auto md:flex-col gap-2 sm:gap-3 md:w-56 lg:w-72 pb-4 md:pb-0 flex-shrink-0"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              className="flex overflow-x-auto md:flex-col gap-2 sm:gap-3 md:w-56 lg:w-72 pb-2 md:pb-0 flex-shrink-0 hide-scrollbar snap-x snap-mandatory px-4 -mx-4 md:px-0 md:mx-0"
             >
                {[
                 { id: 'rack', name: 'Lắp Rack', icon: Server },
@@ -825,7 +825,7 @@ export default function App() {
                 <button
                   key={filter.id}
                   onClick={() => setActiveSpecFilter(filter.id)}
-                  className={`px-5 py-3.5 md:py-4 md:px-6 rounded-xl text-sm font-semibold transition-all text-left whitespace-nowrap md:whitespace-normal border flex items-center gap-3 relative min-h-[48px] ${
+                  className={`shrink-0 snap-center px-5 py-3.5 md:py-4 md:px-6 rounded-xl text-sm font-semibold transition-all text-left whitespace-nowrap md:whitespace-normal border flex items-center gap-3 relative min-h-[48px] ${
                     activeSpecFilter === filter.id 
                       ? 'bg-brand-600 text-white border-brand-400 shadow-[0_0_20px_rgba(37,166,223,0.3)] shadow-brand-500/20' 
                       : 'bg-[#0f172a] text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_80%)] border-brand-500/30 hover:bg-slate-800 hover:border-brand-500/60'
@@ -839,17 +839,17 @@ export default function App() {
             </div>
 
             {/* Spec Table */}
-            <div className="md:flex-1 w-full relative">
+            <div className="md:flex-1 w-full relative px-4 md:px-0">
               {/* Optional background glow for table */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[80%] max-h-[80%] bg-brand-600/10 blur-[40px] md:blur-[80px] pointer-events-none rounded-full"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[80%] max-h-[80%] bg-brand-600/10 blur-[40px] md:blur-[80px] pointer-events-none rounded-full hidden md:block"></div>
               
-              <div className="glass-panel relative rounded-2xl shadow-[0_0_30px_rgba(37,166,223,0.15)] overflow-hidden border border-brand-500/30 w-full z-10 bg-[#0f172a] sm:bg-[#0f172a]/80 sm:backdrop-blur-md">
+              <div className="relative md:rounded-2xl md:shadow-[0_0_30px_rgba(37,166,223,0.15)] md:overflow-hidden md:border border-brand-500/30 w-full z-10 bg-transparent md:bg-[#0f172a]/80 md:backdrop-blur-md">
                  <div className="flex flex-col">
                    <div className="hidden md:grid md:grid-cols-5 bg-black/40 border-b border-brand-500/40">
                      <div className="py-4 px-6 text-sm font-bold text-white col-span-2 border-r border-brand-500/30">Đặc tính kỹ thuật</div>
                      <div className="py-4 px-6 text-sm font-bold text-brand-50 col-span-3">Chi tiết thông số</div>
                    </div>
-                   <div className="max-h-[500px] overflow-y-auto">
+                   <div className="md:max-h-[500px] md:overflow-y-auto">
                      <AnimatePresence mode="wait">
                        <motion.div
                           key={activeSpecFilter}
@@ -857,13 +857,14 @@ export default function App() {
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0, x: -20 }}
                           transition={{ duration: 0.3 }}
+                          className="flex flex-col gap-3 md:gap-0"
                        >
                          {specificationsData[activeSpecFilter].map((spec, index) => (
-                           <div key={index} className="flex flex-col md:grid md:grid-cols-5 border-b last:border-b-0 border-brand-500/20 hover:bg-brand-900/20 transition-all duration-300 group">
-                             <div className="py-3 px-4 md:px-6 md:py-4 text-sm font-semibold text-brand-50 bg-black/20 md:border-r border-brand-500/20 col-span-2 group-hover:text-brand-400 transition-colors flex items-center">
+                           <div key={index} className="flex flex-col md:grid md:grid-cols-5 md:border-b last:border-b-0 border-brand-500/30 hover:bg-brand-900/20 transition-all duration-300 group bg-[#0f172a] md:bg-transparent rounded-xl md:rounded-none border md:border-none shadow-sm md:shadow-none p-1 md:p-0">
+                             <div className="py-3 px-4 md:px-6 md:py-4 text-[11px] md:text-sm font-bold tracking-widest uppercase md:tracking-normal md:font-semibold text-brand-400 md:text-brand-50 md:bg-black/20 md:border-r border-brand-500/20 col-span-2 md:group-hover:text-brand-400 transition-colors flex items-center border-b border-brand-500/10 md:border-b-0">
                                {spec.param}
                              </div>
-                             <div className="py-3 px-4 md:px-6 md:py-4 text-sm text-slate-100 col-span-3 leading-relaxed flex items-center">
+                             <div className="pb-3 pt-2 px-4 md:px-6 md:py-4 text-[15px] md:text-sm text-white md:text-slate-100 col-span-3 leading-relaxed flex items-center font-medium md:font-normal">
                                {spec.value}
                              </div>
                            </div>
@@ -1201,20 +1202,87 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Floating Zalo Button */}
-      <a 
-        href="https://zalo.me/0973497685" 
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-24 sm:bottom-8 right-4 sm:right-8 z-[60] w-12 h-12 sm:w-16 sm:h-16 bg-[#0068FF] rounded-full shadow-[0_0_20px_rgba(0,104,255,0.4)] hover:scale-110 hover:shadow-[0_0_25px_rgba(0,104,255,0.6)] transition-all flex items-center justify-center isolate border-2 border-white"
-        aria-label="Liên hệ Zalo"
-      >
-        <span className="font-extrabold text-white text-sm sm:text-lg mb-[1px] tracking-tight" style={{ fontFamily: 'sans-serif' }}>Zalo</span>
-        <span className="absolute -top-1 -right-1 flex h-4 w-4 sm:h-5 sm:w-5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-4 w-4 sm:h-5 sm:w-5 bg-red-500 border-2 border-white"></span>
-        </span>
-      </a>
+      {/* Floating Zalo Button Area */}
+      <div className="fixed bottom-24 sm:bottom-8 right-4 sm:right-8 z-[60] flex flex-col items-end group">
+        
+        {/* Contact Popup */}
+        <div className={`mb-4 sm:mb-6 mr-0 sm:mr-2 transition-all duration-300 transform origin-bottom-right ${showZaloOptions ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'} sm:group-hover:opacity-100 sm:group-hover:visible sm:group-hover:translate-y-0`}>
+          <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.2)] p-1 w-[320px] sm:w-[380px] border border-gray-100 relative max-h-[80vh] overflow-y-auto">
+            {/* Triangle pointing to button */}
+            <div className="absolute -bottom-[8px] right-6 sm:right-8 w-0 h-0 border-l-[10px] border-l-transparent border-t-[10px] border-t-white border-r-[10px] border-r-transparent drop-shadow-[0_4px_4px_rgba(0,0,0,0.05)] hidden sm:block"></div>
+            
+            <div className="p-4 sm:p-5 pb-3">
+              <div className="flex items-center gap-3 mb-1">
+                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 shrink-0">
+                  <HeadphonesIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-gray-900 font-bold text-base">Hỗ Trợ Trực Tuyến</h4>
+                  <p className="text-gray-500 text-xs mt-0.5">Chat Zalo hoặc gọi Hotline (24/7)</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-gray-50 rounded-xl p-2 flex flex-col gap-1 mx-2 mb-2 border border-gray-100/50">
+              {[
+                { name: "Ms. Dung", phone: "0982 960 685", zalo: "0982960685" },
+                { name: "Ms. Hồng", phone: "096 191 9559", zalo: "0961919559" },
+                { name: "Mr. Sơn", phone: "0973 497 685", zalo: "0973497685" },
+                { name: "Mr. Đức Sơn", phone: "096 165 3553", zalo: "0961653553" },
+                { name: "Ms. Lan", phone: "098 939 5445", zalo: "0989395445" },
+              ].map((contact, idx) => (
+                <a 
+                  key={idx}
+                  href={`https://zalo.me/${contact.zalo}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-3 hover:bg-white rounded-lg transition-all border border-transparent hover:border-gray-200 hover:shadow-sm group/item hover:!opacity-100"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="relative w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-blue-400 flex items-center justify-center text-white text-xs font-bold shrink-0 shadow-sm group-hover/item:scale-110 transition-transform">
+                      {contact.name.split('. ')[1]?.charAt(0) || contact.name.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="font-bold text-gray-800 text-[14px] leading-tight group-hover/item:text-blue-600 transition-colors">{contact.name}</div>
+                      <div className="text-gray-500 text-[13px] font-medium tracking-tight mt-0.5 flex flex-wrap gap-1">
+                          <span className="text-blue-600">Zalo</span> • 
+                          <span className="text-red-500">{contact.phone}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors shrink-0">
+                    <MessageCircle className="w-4 h-4" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Floating Button */}
+        <div className="relative cursor-pointer">
+          <div className="absolute inset-0 bg-[#0068FF] rounded-full animate-zalo-ripple"></div>
+          <div className="absolute inset-0 bg-[#0068FF] rounded-full animate-zalo-ripple-delayed"></div>
+          <button 
+            type="button"
+            onClick={() => {
+              if (window.innerWidth < 640) {
+                setShowZaloOptions(!showZaloOptions);
+              } else {
+                window.open("https://zalo.me/0973497685", "_blank");
+              }
+            }}
+            className="relative w-14 h-14 sm:w-16 sm:h-16 bg-[#0068FF] rounded-full shadow-[0_0_20px_rgba(0,104,255,0.4)] transition-transform flex items-center justify-center isolate border-2 border-white z-10"
+            aria-label="Liên hệ Zalo"
+          >
+            <span className="font-extrabold text-white text-base sm:text-xl tracking-tight mt-[1px]" style={{ fontFamily: 'sans-serif' }}>Zalo</span>
+            <span className="absolute -top-1 -right-1 flex h-4 w-4 sm:h-5 sm:w-5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-4 w-4 sm:h-5 sm:w-5 bg-red-500 border-2 border-white"></span>
+            </span>
+          </button>
+        </div>
+      </div>
 
       {/* Floating CTA for Mobile */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-[#0f172a]   border-t border-brand-500/40 z-50 sm:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
