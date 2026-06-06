@@ -1203,10 +1203,10 @@ export default function App() {
       </footer>
 
       {/* Floating Zalo Button Area */}
-      <div className="fixed bottom-24 sm:bottom-8 right-4 sm:right-8 z-[60] flex flex-col items-end group">
+      <div className="fixed bottom-24 sm:bottom-8 right-4 sm:right-8 z-[60] flex flex-col items-end">
         
         {/* Contact Popup */}
-        <div className={`mb-4 sm:mb-6 mr-0 sm:mr-2 transition-all duration-300 transform origin-bottom-right ${showZaloOptions ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'} sm:group-hover:opacity-100 sm:group-hover:visible sm:group-hover:translate-y-0`}>
+        <div className={`mb-4 sm:mb-6 mr-0 sm:mr-2 transition-all duration-300 transform origin-bottom-right ${showZaloOptions ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-4'}`}>
           <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.2)] p-1 w-[320px] sm:w-[380px] border border-gray-100 relative max-h-[80vh] overflow-y-auto">
             {/* Triangle pointing to button */}
             <div className="absolute -bottom-[8px] right-6 sm:right-8 w-0 h-0 border-l-[10px] border-l-transparent border-t-[10px] border-t-white border-r-[10px] border-r-transparent drop-shadow-[0_4px_4px_rgba(0,0,0,0.05)] hidden sm:block"></div>
@@ -1265,13 +1265,7 @@ export default function App() {
           <div className="absolute inset-0 bg-[#0068FF] rounded-full animate-zalo-ripple-delayed"></div>
           <button 
             type="button"
-            onClick={() => {
-              if (window.innerWidth < 640) {
-                setShowZaloOptions(!showZaloOptions);
-              } else {
-                window.open("https://zalo.me/0973497685", "_blank");
-              }
-            }}
+            onClick={() => setShowZaloOptions(!showZaloOptions)}
             className="relative w-14 h-14 sm:w-16 sm:h-16 bg-[#0068FF] rounded-full shadow-[0_0_20px_rgba(0,104,255,0.4)] transition-transform flex items-center justify-center isolate border-2 border-white z-10"
             aria-label="Liên hệ Zalo"
           >
